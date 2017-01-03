@@ -12,3 +12,7 @@ Google Cloud Storage
 
 # restore procedure
 mongorestore --gzip --archive=/path/to/downloaded/archive
+
+# TODO:
+* Add function for archival download and restore
+* logging and alerting on failure
