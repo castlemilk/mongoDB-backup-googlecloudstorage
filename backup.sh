@@ -46,9 +46,9 @@ function mongo_backup()
 	#mongodb_lock
 	# dump specific collection only:
 	# -------------
-	#mongodb_lock
-	#mongodb_dump ${MONGO_HOST} ${MONGO_PORT} ${MONGO_DB} ${DUMP_PATH} ${MONGO_COLLECTION}
-	#mongodb_unlock
+	mongodb_lock
+	mongodb_dump ${MONGO_HOST} ${MONGO_PORT} ${MONGO_DB} ${DUMP_PATH} ${MONGO_COLLECTION}
+	mongodb_unlock
 	# -------------
 	# dump entire DB name:
 	# -------------

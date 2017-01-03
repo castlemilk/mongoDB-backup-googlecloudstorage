@@ -9,3 +9,6 @@ Google Cloud Storage
 
 # cron-tab configuration
 30 03 * * 0,2,5 /root/db-backup/backup.sh
+
+# restore procedure
+mongorestore --gzip --archive=/path/to/downloaded/archive
