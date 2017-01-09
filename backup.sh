@@ -1,5 +1,7 @@
 #!/bin/bash
-export GOOGLE_APPLICATION_CREDENTIALS="NutritionDB-4ce3546cf063.json"
+WORKING_DIR=`dirname $0`
+BACKUP_DIR=${BACKUP_DIR:-${WORKING_DIR}/backup}
+export GOOGLE_APPLICATION_CREDENTIALS="${WORKING_DIR}/NutritionDB-4ce3546cf063.json"
 
 function mongodb_lock()
 {
@@ -66,12 +68,10 @@ function build_backup_dir()
 		echo " ---> Done."
 	fi
 }
-BACKUP_DIR=${BACKUP_DIR:-`pwd`/backup}
-
 build_backup_dir ${BACKUP_DIR}
 mongo_backup ${BACKUP_DIR} localhost 27017 nuttab nuttab_docs
 NUTTAB_FILE_PATH=$DUMP_PATH
 mongo_backup ${BACKUP_DIR} localhost 27017 usda usda_doc
 USDA_FILE_PATH=$DUMP_PATH
-python cloud_storage_backup.py -f $NUTTAB_FILE_PATH -b nuttab-backup
-python cloud_storage_backup.py -f $USDA_FILE_PATH -b usda-backup
+python ${WORKING_DIR}/cloud_storage_backup.py -f $NUTTAB_FILE_PATH -b nuttab-backup
+python ${WORKING_DIR}/cloud_storage_backup.py -f $USDA_FILE_PATH -b usda-backup
